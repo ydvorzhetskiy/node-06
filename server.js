@@ -1,7 +1,13 @@
-const http = require('http');
+const https = require('https');
 const fs = require('fs');
 
-const server = http.createServer((req, res) => {
+const httpsOptions = {
+    key: fs.readFileSync('./cert.key'),
+    cert: fs.readFileSync('./cert.pem'),
+    passphrase: 'hello'
+};
+
+const server = https.createServer(httpsOptions, (req, res) => {
     res.writeHead(200, {
         'Expires': '0'
     });
